@@ -18,9 +18,9 @@ def waypoint_manager(body: QTMBodyData,
     """ Controls each cf according to the provided trajectories description and the UAVs synchronicity """
 
     # Maximum distance (m) between a cf and a waypoint for which the waypoint is considered to be reached
-    radius_threshold: float = 0.1
+    radius_threshold: float = 0.15
 
-    if abs(body.roll) > 40 or abs(body.pitch) > 40 or body.z > 1.5:
+    if abs(body.roll) > 45 or abs(body.pitch) > 45 or body.z > 1.5:
         print(' ---- Warning ----', body.body_name, ': uncontrolled attitude detected, emergency stop')
         print('                   -> Roll =', body.roll, '° ; Pitch =', body.pitch, '° ; Z =', body.z, 'm')
         waypoint_number = None
@@ -33,10 +33,8 @@ def waypoint_manager(body: QTMBodyData,
             position_goal[1] = body.y
         if position_goal[2] is None:
             position_goal[2] = body.z
-
-        if send_packet:
-            cf.commander.send_position_setpoint(position_goal[0], position_goal[1], position_goal[2], 0)
-        #     cf.commander.send_setpoint(0, 0, 0, 1)
+        if position_goal[3] is None:
+            position_goal[3] = body.yaw
 
         if position_goal[2] != 0:
             distance = np.sqrt(
@@ -48,8 +46,13 @@ def waypoint_manager(body: QTMBodyData,
             #    the motors are turned off as soon as it approaches the ground
             distance = np.sqrt((body.z - position_goal[2]) ** 2)
 
+        if send_packet:
+            # print('Distance =', distance)
+            cf.commander.send_position_setpoint(position_goal[0], position_goal[1], position_goal[2], position_goal[3])
+        #     cf.commander.send_setpoint(0, 0, 0, 1)
+
         if distance < radius_threshold:
-            print(body.body_name, 'on waypoint')
+            # print(body.body_name, 'on waypoint')
             if sequence_activated or waypoint_number == len(waypoints) - 1:
                 if synchronize_waypoints:
                     on_waypoint[uav_num] = True
@@ -79,10 +82,13 @@ def update_waypoint(waypoint_number: int,
             waypoints[waypoint_number][1] = body.y
         if waypoints[waypoint_number][2] is None:
             waypoints[waypoint_number][2] = body.z
+        if waypoints[waypoint_number][3] is None:
+            waypoints[waypoint_number][3] = body.yaw
         print(body.body_name, ': Moving towards waypoint', waypoint_number, '@', waypoints[waypoint_number])
         cf.commander.send_position_setpoint(waypoints[waypoint_number][0],
                                             waypoints[waypoint_number][1],
-                                            waypoints[waypoint_number][2], 0)
+                                            waypoints[waypoint_number][2],
+                                            waypoints[waypoint_number][3])
 
     else:
         waypoint_number = None

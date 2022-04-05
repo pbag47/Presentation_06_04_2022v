@@ -65,6 +65,7 @@ def disconnect_cf(cf_target_list: List[Crazyflie]):
 def reset_kalman_estimation(cf_target, cf_name):
     stabilizer_estimator = 2
     flightmode_pos_set = 1
+    quaternion_std_dev = 0.015  # 0.005
     pos_ctl_pid_thrust_base = 38000
     pos_ctl_pid_xkp = 1.2
     pos_ctl_pid_ykp = 1.2
@@ -73,6 +74,7 @@ def reset_kalman_estimation(cf_target, cf_name):
 
     cf_target.param.set_value('stabilizer.estimator', str(stabilizer_estimator))
     cf_target.param.set_value('flightmode.posSet', str(flightmode_pos_set))
+    cf_target.param.set_value('locSrv.extQuatStdDev', str(quaternion_std_dev))
     print(cf_name, 'flight mode parameters updated')
     cf_target.param.set_value('kalman.resetEstimation', '1')
     print(cf_name, 'Kalman estimation reset')

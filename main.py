@@ -240,53 +240,53 @@ if __name__ == '__main__':
                                      ['cf3', '1', 'E7E7E7E703'],
                                      ['cf4', '1', 'E7E7E7E704']]
 
-    WAYPOINTS = [[[None, None, None],  # cf1
-                  [None, None, 1],  # Takeoff
-                  [0.50, 0.50, 1],  # Beginning flight sequence
-                  [1.00, 0.00, 1],
-                  [0.75, -0.75, 1],
-                  [-0.50, -0.50, 1],
-                  [0.50, -0.50, 1],
-                  [0.75, 0.00, 1],
-                  [0.75, 0.00, 1],
-                  [0.5, 0.5, 1],  # End of flight sequence
-                  [None, None, 0]],  # Land
+    WAYPOINTS = [[[None, None, None, None],  # cf1
+                  [None, None, 1, None],  # Takeoff
+                  [0.50, 0.50, 1, 0],  # Beginning flight sequence
+                  [1.00, 0.00, 1, 0],
+                  [0.75, -0.75, 1, 0],
+                  [-0.50, -0.50, 1, 0],
+                  [0.50, 0.50, 1, 0],
+                  [0.75, 0.00, 1, -20],
+                  [0.75, 0.00, 1, 0],
+                  [0.5, 0.5, 1, 0],  # End of flight sequence
+                  [None, None, 0, None]],  # Land
 
-                 [[None, None, None],  # cf2
-                  [None, None, 1],  # Takeoff
-                  [0.50, -0.50, 1],  # Beginning flight sequence
-                  [0.50, -0.50, 1],
-                  [0.25, -0.25, 1],
-                  [0.25, -0.25, 1],
-                  [0.25, -0.25, 1],
-                  [0.00, -0.75, 1],
-                  [0.00, -0.75, 1],
-                  [0.50, -0.50, 1],  # End of flight sequence
-                  [None, None, 0]],  # Land
+                 [[None, None, None, None],  # cf2
+                  [None, None, 1, None],  # Takeoff
+                  [0.50, -0.50, 1, 0],  # Beginning flight sequence
+                  [0.50, -0.50, 1, 45],
+                  [0.25, -0.25, 1, 45],
+                  [0.25, -0.25, 1, 45],
+                  [0.25, -0.25, 1, 0],
+                  [0.00, -0.75, 1, 0],
+                  [0.00, -0.75, 1, 0],
+                  [0.50, -0.50, 1, 0],  # End of flight sequence
+                  [None, None, 0, None]],  # Land
 
-                 [[None, None, None],  # cf3
-                  [None, None, 1],  # Takeoff
-                  [-0.50, 0.50, 1],  # Beginning flight sequence
-                  [0.00, 0.00, 1],
-                  [0.50, 0.50, 1],
-                  [0.75, -0.75, 1],
-                  [-0.50, -0.50, 1],
-                  [-0.75, 0.00, 1],
-                  [-0.75, 0.00, 1],
-                  [-0.50, 0.50, 1],  # End of flight sequence
-                  [None, None, 0]],  # Land
+                 [[None, None, None, None],  # cf3
+                  [None, None, 1, None],  # Takeoff
+                  [-0.50, 0.50, 1, 0],  # Beginning flight sequence
+                  [0.00, 0.00, 1, 0],
+                  [0.50, 0.50, 1, 0],
+                  [0.75, -0.75, 1, 0],
+                  [-0.50, -0.50, 1, 0],
+                  [-0.75, 0.00, 1, 0],
+                  [-0.75, 0.00, 1, 0],
+                  [-0.50, 0.50, 1, 0],  # End of flight sequence
+                  [None, None, 0, None]],  # Land
 
-                 [[None, None, None],  # cf4
-                  [None, None, 1],  # Takeoff
-                  [-0.50, -0.50, 1],  # Beginning flight sequence
-                  [-0.50, -0.50, 1],
-                  [-0.50, -0.25, 1],
-                  [0.50, 0.50, 1],
-                  [0.75, -0.75, 1],
-                  [0.00, 0.75, 1],
-                  [0.00, 0.00, 1],
-                  [-0.50, -0.50, 1],  # End of flight sequence
-                  [None, None, 0]]]  # Land
+                 [[None, None, None, None],  # cf4
+                  [None, None, 1, None],  # Takeoff
+                  [-0.50, -0.50, 1, 0],  # Beginning flight sequence
+                  [-0.50, -0.50, 1, 0],
+                  [-0.50, -0.25, 1, 0],
+                  [0.50, 0.50, 1, 0],
+                  [0.75, -0.75, 1, 0],
+                  [0.00, 0.75, 1, 0],
+                  [0.00, 0.00, 1, 0],
+                  [-0.50, -0.50, 1, 0],  # End of flight sequence
+                  [None, None, 0, None]]]  # Land
 
     # Boolean : True to make sure that all UAVs reached their respective waypoint before they move to the next ones
     #           False to allow UAVs to reach all their waypoints without waiting for the others
