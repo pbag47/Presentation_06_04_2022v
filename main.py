@@ -242,49 +242,57 @@ if __name__ == '__main__':
 
     WAYPOINTS = [[[None, None, None, None],  # cf1
                   [None, None, 1, None],  # Takeoff
+                  [None, None, 1, 0],  # Yaw alignment
                   [0.50, 0.50, 1, 0],  # Beginning flight sequence
                   [1.00, 0.00, 1, 0],
                   [0.75, -0.75, 1, 0],
                   [-0.50, -0.50, 1, 0],
+                  [0.00, 0.50, 1, 0],
                   [0.50, 0.50, 1, 0],
-                  [0.75, 0.00, 1, -20],
-                  [0.75, 0.00, 1, 0],
-                  [0.5, 0.5, 1, 0],  # End of flight sequence
+                  [0.50, 0.50, 1, 30],
+                  [0.50, 0.50, 1, 30],
+                  [0.50, 0.50, 1, 0],  # End of flight sequence
                   [None, None, 0, None]],  # Land
 
                  [[None, None, None, None],  # cf2
                   [None, None, 1, None],  # Takeoff
+                  [None, None, 1, 0],  # Yaw alignment
                   [0.50, -0.50, 1, 0],  # Beginning flight sequence
-                  [0.50, -0.50, 1, 45],
-                  [0.25, -0.25, 1, 45],
-                  [0.25, -0.25, 1, 45],
-                  [0.25, -0.25, 1, 0],
-                  [0.00, -0.75, 1, 0],
-                  [0.00, -0.75, 1, 0],
+                  [0.50, -0.50, 1, 30],
+                  [0.25, -0.25, 1, 30],
+                  [0.25, -0.25, 1, 50],
+                  [0.25, -0.25, 1, 30],
+                  [0.50, 0.00, 1, 30],
+                  [0.50, -0.50, 1, 30],
+                  [0.50, -0.50, 1, 0],
                   [0.50, -0.50, 1, 0],  # End of flight sequence
                   [None, None, 0, None]],  # Land
 
                  [[None, None, None, None],  # cf3
                   [None, None, 1, None],  # Takeoff
+                  [None, None, 1, 0],  # Yaw alignment
                   [-0.50, 0.50, 1, 0],  # Beginning flight sequence
-                  [0.00, 0.00, 1, 0],
+                  [0.00, 0.50, 1, 0],
                   [0.50, 0.50, 1, 0],
                   [0.75, -0.75, 1, 0],
-                  [-0.50, -0.50, 1, 0],
-                  [-0.75, 0.00, 1, 0],
-                  [-0.75, 0.00, 1, 0],
+                  [-0.25, -0.75, 1, 0],
+                  [-0.50, 0.00, 1, 0],
+                  [-0.50, 0.50, 1, 0],
+                  [-0.50, 0.50, 1, -30],
                   [-0.50, 0.50, 1, 0],  # End of flight sequence
                   [None, None, 0, None]],  # Land
 
                  [[None, None, None, None],  # cf4
                   [None, None, 1, None],  # Takeoff
+                  [None, None, 1, 0],  # Yaw alignment
                   [-0.50, -0.50, 1, 0],  # Beginning flight sequence
                   [-0.50, -0.50, 1, 0],
-                  [-0.50, -0.25, 1, 0],
+                  [-0.50, 0.25, 1, 0],
                   [0.50, 0.50, 1, 0],
-                  [0.75, -0.75, 1, 0],
-                  [0.00, 0.75, 1, 0],
-                  [0.00, 0.00, 1, 0],
+                  [0.75, -0.50, 1, 0],
+                  [0.00, -0.75, 1, 0],
+                  [-0.50, -0.50, 1, 0],
+                  [-0.50, -0.50, 1, 30],
                   [-0.50, -0.50, 1, 0],  # End of flight sequence
                   [None, None, 0, None]]]  # Land
 

@@ -13,12 +13,15 @@ def waypoint_manager(body: QTMBodyData,
                      all_on_waypoint: bool,
                      send_packet: bool,
                      on_waypoint: List[bool],
-                     sequence_activated):
+                     sequence_activated: bool):
 
     """ Controls each cf according to the provided trajectories description and the UAVs synchronicity """
 
     # Maximum distance (m) between a cf and a waypoint for which the waypoint is considered to be reached
-    radius_threshold: float = 0.15
+    radius_threshold: float = 0.20
+
+    # Maximum yaw error (°) tolerated between yaw command and actual UAV yaw to validate a waypoint
+    yaw_error_tolerance: float = 10
 
     if abs(body.roll) > 45 or abs(body.pitch) > 45 or body.z > 1.5:
         print(' ---- Warning ----', body.body_name, ': uncontrolled attitude detected, emergency stop')
@@ -39,20 +42,21 @@ def waypoint_manager(body: QTMBodyData,
         if position_goal[2] != 0:
             distance = np.sqrt(
                 (body.x - position_goal[0]) ** 2 + (body.y - position_goal[1]) ** 2 + (body.z - position_goal[2]) ** 2)
+            yaw_error = abs(position_goal[3] - body.yaw)
         else:
             # For flight stability reasons, if a landing waypoint is encountered,
             # then the distance criteria is only based on the cf height
             # -> Even if the cf lands outside the expected waypoint sphere,
             #    the motors are turned off as soon as it approaches the ground
             distance = np.sqrt((body.z - position_goal[2]) ** 2)
+            yaw_error = 0
+
+        # print('     ', body.body_name, ': d =', distance, 'm, ; Delta_psi =', yaw_error)
 
         if send_packet:
-            # print('Distance =', distance)
             cf.commander.send_position_setpoint(position_goal[0], position_goal[1], position_goal[2], position_goal[3])
-        #     cf.commander.send_setpoint(0, 0, 0, 1)
 
-        if distance < radius_threshold:
-            # print(body.body_name, 'on waypoint')
+        if distance < radius_threshold and yaw_error <= yaw_error_tolerance:
             if sequence_activated or waypoint_number == len(waypoints) - 1:
                 if synchronize_waypoints:
                     on_waypoint[uav_num] = True
@@ -85,6 +89,7 @@ def update_waypoint(waypoint_number: int,
         if waypoints[waypoint_number][3] is None:
             waypoints[waypoint_number][3] = body.yaw
         print(body.body_name, ': Moving towards waypoint', waypoint_number, '@', waypoints[waypoint_number])
+
         cf.commander.send_position_setpoint(waypoints[waypoint_number][0],
                                             waypoints[waypoint_number][1],
                                             waypoints[waypoint_number][2],

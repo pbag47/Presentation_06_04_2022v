@@ -69,6 +69,7 @@ def reset_kalman_estimation(cf_target, cf_name):
     pos_ctl_pid_thrust_base = 38000
     pos_ctl_pid_xkp = 1.2
     pos_ctl_pid_ykp = 1.2
+    pos_ctl_pid_rp_limit = 10
 
     time.sleep(5)
 
@@ -81,6 +82,7 @@ def reset_kalman_estimation(cf_target, cf_name):
     cf_target.param.set_value('posCtlPid.thrustBase', str(pos_ctl_pid_thrust_base))
     cf_target.param.set_value('posCtlPid.xKp', str(pos_ctl_pid_xkp))
     cf_target.param.set_value('posCtlPid.yKp', str(pos_ctl_pid_ykp))
+    cf_target.param.set_value('posCtlPid.rpLimit', str(pos_ctl_pid_rp_limit))
     print(cf_name, 'PID parameters updated')
     return True
 
